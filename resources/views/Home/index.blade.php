@@ -1,0 +1,1 @@
+  <h1>Hello @if(!empty($name)) {{ $name }} @endif</h1>
