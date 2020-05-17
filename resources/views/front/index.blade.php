@@ -2,6 +2,8 @@
 @section('content')
 
 <section id="featured">
+@include('common' , ['name' => 'Helal'])
+
       <!-- start slider -->
       <!-- Slider -->
       <div id="nivo-slider">
