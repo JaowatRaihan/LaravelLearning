@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Post;
 
-class IndexController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,12 +16,17 @@ class IndexController extends Controller
     public function index()
     {
         //
-        return view('front.index');
+        return view('front.post.index');
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        //
+        
         
     }
 
@@ -32,7 +38,17 @@ class IndexController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       // dd($request);
+        $insert = new Post();
+
+        $insert->title = $request->title;
+        $insert->author_name = $request->author_name;
+        $insert->description = $request->description;
+        //$insert->created_at = now();
+        //$insert->updated_at = now();
+
+        $insert->save();
+        return back()->with('success', 'Message sent successfully');
     }
 
     /**

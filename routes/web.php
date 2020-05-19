@@ -21,3 +21,5 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/Home/{id}', 'Home\IndexController@show');
 
 Route::get('/', 'Front\IndexController@index');
+Route::get('/posts', 'Front\PostController@index');
+Route::post('/posts/add', 'Front\PostController@store');

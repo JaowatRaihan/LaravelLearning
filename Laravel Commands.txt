@@ -1,0 +1,9 @@
+
+Create Controller with resource: php artisan make:controller Front/PostController -r
+
+
+----Migration-----
+Create migration: php artisan make:migration any_name
+Update into Database: php artisan migrate
+Roleback One step: php artisan migrate:rollback --step=1
+
