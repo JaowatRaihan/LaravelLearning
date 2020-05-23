@@ -1,7 +1,11 @@
 @extends('layout.master')
 @section('content')
 
+
+
 <section id="featured">
+
+
 
 <section id="inner-headline">
       <div class="container">
@@ -23,34 +27,45 @@
 
     <section id="content">
 
+
+
       <div class="container">
+      <a href="{{ url('post/create') }}" class="btn btn-default pull-right">Add Post</a>
         <div class="row">
           <div class="span12">
-            <h4>Get in touch with us by filling <strong>contact form below</strong></h4>
-
-            <form action="{{ url('/posts/add') }}" method="post" role="form" class="contactForm">
-              @csrf
-              <div id="sendmessage">Your message has been sent. Thank you!</div>
-              <div id="errormessage"></div>
-
-              <div class="row">
-                <div class="span6 form-group">
-                  <input type="text" name="title" class="form-control" id="name" placeholder="Ttile" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required />
-                  <div class="validation"></div>
-                </div>
-                <div class="span6 form-group">
-                  <input type="text" class="form-control" name="author_name" id="email" placeholder="Author Name" data-rule="email" data-msg="Please enter a valid email" required/>
-                  <div class="validation"></div>
-                </div>
-                <div class="span12 margintop10 form-group">
-                  <textarea class="form-control" name="description" rows="12" data-rule="required" data-msg="Please write something for us" placeholder="Description" required></textarea>
-                  <div class="validation"></div>  
-                  <p class="text-center">
-                    <button class="btn btn-large btn-theme margintop10" type="submit">Create Post</button>
-                  </p>
-                </div>
-              </div>
-            </form>
+            <h4>Default Styles with hover enabled</h4>
+            @if(!empty($posts))
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th> Sl. </th>
+                  <th>  Title </th>
+                  <th> Auhtor </th>
+                  <th>  Description  </th>
+                  <th>  Create Time  </th>
+                  <th> Option </th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                @foreach($posts as $key => $post)
+                <tr>
+                  <td> {{ ++ $key }} </td>
+                  <td> {{ $post->id }} </td> 
+                  <td>  {{$post->title }}  </td>
+                  <td>  {{$post->author_name }}  </td>
+                  <td> {{$post->description }}  </td>
+                  <td> {{$post->created_at->format('d/m/Y - h:i a') }}  </td>
+                  <td>
+                    <a href="Edit" title="Edit" class="btn btn-info">Edit</a>
+                    <a href="Delete" title="Delete" class="btn btn-danger">Delete</a>
+                  </td>
+                </tr>
+                @endforeach
+               
+              </tbody>
+            </table>
+            @endif
           </div>
         </div>
       </div>

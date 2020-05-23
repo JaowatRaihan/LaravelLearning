@@ -15,8 +15,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
-        return view('front.post.index');
+        $posts = Post::get();
+        return view('front.post.index') -> with('posts',$posts);
     }
 
     /**
@@ -24,10 +24,10 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function create()
     {
-        
-        
+        return view('front.post.add_post');
     }
 
     /**
@@ -38,15 +38,12 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-       // dd($request);
         $insert = new Post();
-
         $insert->title = $request->title;
         $insert->author_name = $request->author_name;
         $insert->description = $request->description;
         //$insert->created_at = now();
         //$insert->updated_at = now();
-
         $insert->save();
         return back()->with('success', 'Message sent successfully');
     }
