@@ -30,7 +30,7 @@
 
 
       <div class="container">
-      <a href="{{ url('post/create') }}" class="btn btn-default pull-right">Add Post</a>
+      <a href="{{ url('post/create') }}" class="btn btn-default pull-right">Create New Post</a>
         <div class="row">
           <div class="span12">
             <h4>Default Styles with hover enabled</h4>
@@ -52,11 +52,12 @@
                 <tr>
                   <td> {{ ++ $key }} </td>
                   <td> {{ $post->id }} </td> 
-                  <td>  {{$post->title }}  </td>
-                  <td>  {{$post->author_name }}  </td>
+                  <td> {{$post->title }}  </td>
+                  <td> {{$post->author_name }}  </td>
                   <td> {{$post->description }}  </td>
                   <td> {{$post->created_at->format('d/m/Y - h:i a') }}  </td>
                   <td>
+                    <a href="" title="View" class="btn btn-primary">View</a>
                     <a href="Edit" title="Edit" class="btn btn-info">Edit</a>
                     <a href="Delete" title="Delete" class="btn btn-danger">Delete</a>
                   </td>
