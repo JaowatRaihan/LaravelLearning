@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CommentTableCreated extends Migration
+class AddDeletedAtColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CommentTableCreated extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('comments', function (Blueprint $table) {
-            $table->id();
-            $table->string('comment');
-            $table->string('commenter ');
-            $table->timestamps();
+        Schema::table('posts', function (Blueprint $table) {
+            //
+            $table->softDeletes();
         });
     }
 
@@ -29,6 +26,8 @@ class CommentTableCreated extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('posts', function (Blueprint $table) {
+            //
+        });
     }
 }

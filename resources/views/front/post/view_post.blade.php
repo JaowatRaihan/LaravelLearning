@@ -4,17 +4,17 @@
 <section id="featured">
     <section id="content">
         <div class="container">
-            <a href="{{ url('posts/edit') }}" class="btn btn-info pull-right">Edit List</a>
+            <a href="{{ url('post/edit/1') }}" class="btn btn-info pull-right">Edit This Post</a> &nbsp;
             <a href="{{ url('posts') }}" class="btn btn-info pull-right">All Posts</a>
             <div class="row">
                 <div class="span12">
-                    <h2>{{ $post->title }}</strong></h4>
+                    <h3>{{ $post->title }}</strong></h3>
                     <hr />
-                    <h3>{{ $post->description }}</h3>
+                    <h5>{{ $post->description }}</h5>
                     <p></p>
-                    <div class="pull-right">
+                    <div>
                         <smaill>
-                            Posted By: {{ $post->author_name }}
+                            Posted By: {{ $post->author_name }} <br />
                             Posted On: {{ $post->created_at->format('d/m/Y - h:i a') }}
                         </small>
                     </div>

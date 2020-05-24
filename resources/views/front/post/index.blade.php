@@ -23,11 +23,9 @@
           </div>
         </div>
       </div>
-    </section>
+  </section>
 
-    <section id="content">
-
-
+  <section id="content">
 
       <div class="container">
       <a href="{{ url('post/create') }}" class="btn btn-default pull-right">Create New Post</a>
@@ -51,15 +49,14 @@
                 @foreach($posts as $key => $post)
                 <tr>
                   <td> {{ ++ $key }} </td>
-                  <td> {{ $post->id }} </td> 
                   <td> {{$post->title }}  </td>
                   <td> {{$post->author_name }}  </td>
                   <td> {{$post->description }}  </td>
                   <td> {{$post->created_at->format('d/m/Y - h:i a') }}  </td>
                   <td>
-                    <a href="" title="View" class="btn btn-primary">View</a>
-                    <a href="Edit" title="Edit" class="btn btn-info">Edit</a>
-                    <a href="Delete" title="Delete" class="btn btn-danger">Delete</a>
+                      <a href="{{ url('post/view/'. $post->id) }}" title="View" class="btn btn-primary">View</a>
+                      <a href="Edit" title="Edit" class="btn btn-info">Edit</a>
+                      <a href="{{ url('post/delete/'. $post->id) }}" title="Delete" class="btn btn-danger">Delete</a>
                   </td>
                 </tr>
                 @endforeach
