@@ -20,7 +20,9 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/Home', 'Home\IndexController@index');
 // Route::get('/Home/{id}', 'Home\IndexController@show');
 
+//---------------Post Controller Starts-------------------------------
 Route::get('/', 'Front\IndexController@index');
+Route::get('', 'Front\IndexController@index');
 Route::get('/posts', 'Front\PostController@index');
 Route::get('/post/create', 'Front\PostController@create');
 Route::get('/post/view/{id}', 'Front\PostController@show');
@@ -28,3 +30,7 @@ Route::get('/post/edit/{id}', 'Front\PostController@edit');
 Route::get('/post/delete/{id}', 'Front\PostController@destroy');
 Route::post('/posts/add', 'Front\PostController@store');
 Route::post('/post/update', 'Front\PostController@update');
+//---------------Post Controller Ends-------------------------------
+
+Route::post('/auth/signup', 'AuthController@store');
+Route::post('/auth/signin', 'AuthController@login');
