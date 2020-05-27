@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Post;
 
 class AuthController extends Controller
 {
@@ -11,11 +12,11 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $user = User::where("name",$request->name )->where("password",$request->password)->get();
-        if(!empty($user) && $user->is_registered == 1 )
+        if(!empty($user) )
         {
-            return view("front.post.index");
+            
         }
-        return back()->with('fail', 'Logged In Failed');
+        
     }
 
     public function store(Request $request)

@@ -22,7 +22,6 @@ use Illuminate\Support\Facades\Route;
 
 //---------------Post Controller Starts-------------------------------
 Route::get('/', 'Front\IndexController@index');
-Route::get('', 'Front\IndexController@index');
 Route::get('/posts', 'Front\PostController@index');
 Route::get('/post/create', 'Front\PostController@create');
 Route::get('/post/view/{id}', 'Front\PostController@show');
