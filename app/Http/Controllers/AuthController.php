@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\User;
-use App\Post;
 
 class AuthController extends Controller
 {
@@ -14,13 +16,28 @@ class AuthController extends Controller
         $user = User::where("name",$request->name )->where("password",$request->password)->get();
         if(!empty($user) )
         {
-            
+            return redirect('/posts');
         }
         
     }
 
     public function store(Request $request)
     {
+    
+        $validate = Validator::make($request->all(),
+            ['name' => 'required|max:100|unique:posts,name,NULL,id,deleted_at,NULL',
+             'email' => 'required|email|max:150',
+             'password' => 'required|min:3|max:20',
+             'conf_password' => 'required|same:password|min:3|max:20'
+            ]
+           // 'email' => 'required|email|unique:users,email,'.$request->id.',id,deleted_at,NULL'
+           
+            // ['name.unique' => 'Company Name exists!']
+        );
+        if($validate->fails()){ 
+            return back()->withErrors($validate)->withInput();
+        }
+       
         $insert = new User();
         $insert->email = $request->email;
         $insert->password = $request->password;

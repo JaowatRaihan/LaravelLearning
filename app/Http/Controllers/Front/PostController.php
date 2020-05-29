@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Post;
+use Validator;
 
 class PostController extends Controller
 {
@@ -19,15 +20,29 @@ class PostController extends Controller
         return view('front.post.add_post');
     }
 
+
+    // [
+    //     'batch_id.max' => 'Batch id/number may not be greater than 40 characters.',
+    //     'batch_id.unique' => 'Batch id/number has already been taken.',
+    //     'p_price.regex' => 'Price will be upto 2 decimal places',
+//  regex:/^\d+(\.\d{1,2})?$/|between:0.01, 99999999.99
     public function store(Request $request)
     {
-        $insert = new Post();
-        $insert->title = $request->title;
-        $insert->author_name = $request->author_name;
-        $insert->description = $request->description;
-        //$insert->created_at = now();
-        //$insert->updated_at = now();
-        $insert->save();
+        $validate = Validator::make($request->all(),
+            ['title' => 'required|min:3|max:20|regex:/[a-zA-Z]{9}/',
+             'author_name' => 'required|min:3|max:20',
+             'description' => 'nullable|min:3|max:20' ],
+            ['title.min' => 'Minimum Title','title.regex' => 'Regex not matched']
+        );
+        if($validate->fails()){ return back()->withErrors($validate)->withInput()->with('error','Oops! Something went wrong!');}
+
+        $post = new Post();
+        // $insert->title = $request->title;
+        // $insert->author_name = $request->author_name;
+        // $insert->description = $request->description;
+        //$insert->save();
+        $input = $request->all();
+        $post->fill($input)->save();
         return back()->with('success', 'Message sent successfully');
     }
 
@@ -45,15 +60,11 @@ class PostController extends Controller
 
     public function update(Request $request)
     {
-        // $validate = Validator::make($request->all(),
-        //     ['product_name' => 'required|max:300|unique:products,product_name,'.$request->id.',id,deleted_at,NULL',
-        //      'product_id' => 'required|numeric|digits:6|unique:products,product_id,'.$request->id.',id,deleted_at,NULL',
-        //      'batch_id' => 'nullable|max:40|unique:products,batch_id,'.$request->id.',id,deleted_at,NULL',
-             
-        //      'company_id' => 'required',
-        //      'is_active' => 'required',
-        //      'photo' => 'nullable|mimes:jpeg,png,jpg|max:2048' ]);
-        // if($validate->fails()){ return back()->withErrors($validate)->withInput();}
+        $validate = Validator::make($request->all(),
+        ['title' => 'required|min:3|max:20',
+         'author_name' => 'required|min:3|max:20',
+         'description' => 'required|min:3|max:20' ]);
+        if($validate->fails()){ return back()->withErrors($validate)->withInput();}
 
         // $dt = new DateTime(); $current_date = $dt->format('d');
         // $orderCount = OrderCount::find(2);

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    //protected $guarded = [];
+    protected $guarded = [];
 
     use SoftDeletes;
     
