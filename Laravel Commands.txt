@@ -8,3 +8,5 @@ Modify Table(by making a new migration): php artisan make:migration any_name --t
 Update into Database: php artisan migrate
 Roleback One step: php artisan migrate:rollback --step=1
 
+-----Clear cache----------
+php artisan config:cache

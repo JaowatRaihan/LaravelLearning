@@ -7,18 +7,26 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use Session;
 
 class AuthController extends Controller
 {
 
     public function login(Request $request)
     {
-        $user = User::where("name",$request->name )->where("password",$request->password)->get();
-        if(!empty($user) )
-        {
-            return redirect('/posts');
+        $validate = Validator::make($request->all(), ['email' => 'required|email', 'password' => 'required'] );
+        if($validate->fails()){ return back()->withErrors($validate)->withInput(); }
+
+        //dd($request);
+
+        if(Auth::guard('usergaurd')->attempt([
+            'email' =>  $request->email,
+            'password' =>  $request->password
+        ])){
+            $request->session()->put('sessionUser');
+            return redirect('/posts')->with('success', 'Logged in successful');
         }
-        
+        return redirect('/')->with('error', 'Email/Password Do not match');      
     }
 
     public function store(Request $request)

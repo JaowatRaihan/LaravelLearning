@@ -28,15 +28,7 @@
     <section id="content">
     
   
-    @if(Session('success'))
-    <div class="alert alert-success foo" role="alert"> 
-      {{ Session('success') }} {{ Session::forget('success') }} 
-    </div>
-    @elseif(Session('error'))
-      <div class="alert alert-danger foo" role="alert"> 
-      {{ Session('error') }} {{ Session::forget('error') }} 
-      </div>
-     @endif
+      @include('partials.flash_message')
 
       <div class="container">
       <a href="{{ url('posts') }}" class="btn btn-info pull-right">Post List</a>

@@ -2,6 +2,7 @@
 @section('content')
 
 <section id="featured">
+@include('partials.flash_message')
 @include('common' , ['name' => 'Helal'])
 
       <!-- start slider -->
