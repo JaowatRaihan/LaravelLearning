@@ -25,8 +25,13 @@
           <div class="span12">
             <div class="headnav">
               <ul>
+                @if(Auth::guard('usergaurd')->check())
+                {{ ucfirst(Auth::guard('usergaurd')->user()->name) }}
+                <li><a href="{{ url('auth/signout') }}" data-toggle="modal">Logout</a></li>
+                @else
                 <li><a href="#mySignup" data-toggle="modal"><i class="icon-user"></i> Sign up</a></li>
-                <li><a href="#mySignin" data-toggle="modal">Sign in</a></li>
+                <li><a href="#mySignin" data-toggle="modal">Log in</a></li>
+                @endif
               </ul>
             </div>
             <!-- Signup Modal -->

@@ -17,13 +17,11 @@ class AuthController extends Controller
         $validate = Validator::make($request->all(), ['email' => 'required|email', 'password' => 'required'] );
         if($validate->fails()){ return back()->withErrors($validate)->withInput(); }
 
-        //dd($request);
-
         if(Auth::guard('usergaurd')->attempt([
             'email' =>  $request->email,
             'password' =>  $request->password
         ])){
-            $request->session()->put('sessionUser');
+            $request->session()->put('sessionUser', $request->email );
             return redirect('/posts')->with('success', 'Logged in successful');
         }
         return redirect('/')->with('error', 'Email/Password Do not match');      
@@ -53,5 +51,13 @@ class AuthController extends Controller
         $insert->is_registered = false;
         $insert->save();
         return back()->with('success', 'Message sent successfully');
+    }
+
+    public function logout(Request $request)
+    {
+        $request->session()->forget('sessionUser');
+        $request->session()->flush();
+        Auth::guard('usergaurd')->logout();
+        return redirect('/')->with('success', 'Logged out successfully.');    
     }
 }

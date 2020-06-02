@@ -30,9 +30,10 @@ Route::get('/clear', function() {
 // Route::get('/Home', 'Home\IndexController@index');
 // Route::get('/Home/{id}', 'Home\IndexController@show');
 
-//---------------Post Controller Starts-------------------------------
+
 Route::get('/', 'Front\IndexController@index');
 
+//---------------Post Controller Starts-------------------------------
 Route::group(['middleware' => ['sessUser']], function () {
     Route::get('/posts', 'Front\PostController@index');
     Route::get('/post/create', 'Front\PostController@create');
@@ -46,3 +47,4 @@ Route::group(['middleware' => ['sessUser']], function () {
 
 Route::post('/auth/signup', 'AuthController@store');
 Route::post('/auth/signin', 'AuthController@login');
+Route::get('/auth/signout', 'AuthController@logout');
